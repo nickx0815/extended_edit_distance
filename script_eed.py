@@ -1,14 +1,36 @@
 class eed:
     
     def __init__(self, s1, s2, print_steps = False):
+        for s in [s1,s2]:
+            if (not isinstance(s, str)):
+                raise ValueError("the value %s is not of type String!"%(s))
         self.__eed_matrix = []
         self.__eed_operations = []
         
         self.ps = print_steps
         self.__string_1=s1.lower()
         self.__string_2=s2.lower()
-        self.__create_matrix()
-                    
+    
+    def get_string_1(self):
+        if self.__string_1:
+            return self.__string_1
+        return False
+        
+    def get_string_2(self):
+        if self.__string_2:
+            return self.__string_2
+        return False
+    
+    def set_string_1(self, str):
+        if (not isinstance(str, str)):
+            raise ValueError("the value %s is not of type String"%(str))
+        self.__string_1 = str
+        
+    def set_string_2(self, str):
+        if (not isinstance(str, str)):
+            raise ValueError("the value %s is not of type String"%(str))
+        self.__string_2 = str
+
     def __create_matrix(self):
         for col_s2 in range(len(self.__string_2)+1):
             row_val = []
@@ -21,7 +43,8 @@ class eed:
                 row_val.append("")
             self.__eed_operations.append(row_val)
             
-    def _create_eed(self):
+    def _create_edit_distance(self):
+        self.__create_matrix()
         self.__create_empty_rows()
         self.__create_empty_column()
         for row in range(1,len(self.__eed_matrix)):  
@@ -94,7 +117,7 @@ class eed:
                 index_col-=1
                 if index_row>0:
                     index_row-=1
-                print("Operation Nr.%s: REPLACEMENT of %s with %s)")%(num_operation, char.upper(),
+                print("Operation Nr.%s: REPLACEMENT of %s with %s")%(num_operation, char.upper(),
                                                                           new_char)
                 print(list_string_from)
                 n_operation-=1
@@ -195,6 +218,4 @@ class eed:
             __num+=1
 
 e1 = eed(s1="Fussball",s2="Football", print_steps=True)
-e1._create_eed()
-        
-        
+e1._create_edit_distance()
