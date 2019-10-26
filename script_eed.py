@@ -59,12 +59,15 @@ class eed:
     def __print_result(self):
         print("String 1: "+self.__string_1.upper()+" to String 2: "+self.__string_2.upper())
         print("") 
-        self.__print_matrix()
-        if self.ps:
-            print("")
-            print("Edit Steps") 
-            print("")
-            self.__print_edit_step()
+        print("")
+        print("Edit Steps") 
+        print("")
+        self.__print_edit_step()
+        print(" ")
+        self.__print_matrix_eed()
+        print(" ")
+        print(" ")
+        self.__print_matrix_operations()
         print(" ")
         print("Mininmal number of operations") 
         print("")
@@ -77,6 +80,21 @@ class eed:
         print("Parameter Free Extended edit distance") 
         print("")
         print(str(round(self.__para_free_extended_edit_distance,2)))
+    
+    def __print_matrix_operations(self):
+        row_labels = [" "]
+        col_labels = "         "
+        for char in self.__string_2:
+            row_labels.append(char.upper())
+        for char in self.__string_1:
+            col_labels+="%s   " % (char.upper())
+        print(col_labels)
+        for row_label, row in zip(row_labels, self.__eed_operations):
+            print('%s [%s]') % (row_label, ' '.join('%03s' % i.upper() for i in row))
+        print(" ")
+        print("R = Replacement / N = Nothing / I = Insertion / D = Deletion")
+        print(" ")
+        
     
     def __print_edit_step(self):
         list_string_from = []
@@ -166,7 +184,7 @@ class eed:
         self.__calculate_factor()
         self.__extended_edit_distance = self.__eed+(self.__total_number_char-(2*self.__total_num))
     
-    def __print_matrix(self):
+    def __print_matrix_eed(self):
         row_labels = [" "]
         col_labels = "         "
         for char in self.__string_2:
