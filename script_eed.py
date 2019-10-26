@@ -94,7 +94,6 @@ class eed:
         print("R = Replacement / N = Nothing / I = Insertion / D = Deletion")
         print(" ")
         
-    
     def __print_edit_step(self):
         list_string_from = []
         list_string_to = []
@@ -237,5 +236,5 @@ class eed:
             self.__eed_operations[__num][0]= 'i'
             __num+=1
 
-e1 = eed(s1="Wirtschaft",s2="Kunst")
+e1 = eed(s1="marwan",s2="rarwen")
 e1.create_edit_distance()
