@@ -4,9 +4,6 @@ class eed:
         for s in [s1,s2]:
             if (not isinstance(s, str)):
                 raise ValueError("the value %s is not of type String!"%(s))
-        self.__eed_matrix = []
-        self.__eed_operations = []
-        
         self.ps = print_steps
         self.__string_1=s1.lower()
         self.__string_2=s2.lower()
@@ -24,12 +21,12 @@ class eed:
     def set_string_1(self, new_str):
         if (not isinstance(new_str, str)):
             raise ValueError("the value %s is not of type String"%(new_str))
-        self.__string_1 = new_str
+        self.__string_1 = new_str.lower()
         
     def set_string_2(self, new_str):
         if (not isinstance(new_str, str)):
             raise ValueError("the value %s is not of type String"%(new_str))
-        self.__string_2 = new_str
+        self.__string_2 = new_str.lower()
 
     def __create_matrix(self):
         for col_s2 in range(len(self.__string_2)+1):
@@ -44,6 +41,8 @@ class eed:
             self.__eed_operations.append(row_val)
             
     def create_edit_distance(self):
+        self.__eed_matrix = []
+        self.__eed_operations = []
         self.__create_matrix()
         self.__create_empty_rows()
         self.__create_empty_column()
@@ -217,5 +216,5 @@ class eed:
             self.__eed_operations[__num][0]= 'i'
             __num+=1
 
-e1 = eed(s1="Nick",s2="Teresa", print_steps=True)
+e1 = eed(s1="Wirtschaft",s2="Kunst", print_steps=True)
 e1.create_edit_distance()
