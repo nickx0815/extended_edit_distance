@@ -91,8 +91,13 @@ class eed:
         for row_label, row in zip(row_labels, self.__eed_operations):
             print('%s [%s]') % (row_label, ' '.join('%03s' % i.upper() for i in row))
         print(" ")
-        print("R = Replacement / N = Nothing / I = Insertion / D = Deletion")
+        print("N = do nothing / R = Replacement / I = Insertion / D = Deletion")
         print(" ")
+        print(" ____________________________")
+        print("| Replacement | Insertion    |")
+        print(" ----------------------------")
+        print("| Deletion    | your're_here |")
+        print(" ----------------------------")
         
     def __print_edit_step(self):
         list_string_from = []
