@@ -21,15 +21,15 @@ class eed:
             return self.__string_2
         return False
     
-    def set_string_1(self, str):
-        if (not isinstance(str, str)):
-            raise ValueError("the value %s is not of type String"%(str))
-        self.__string_1 = str
+    def set_string_1(self, new_str):
+        if (not isinstance(new_str, str)):
+            raise ValueError("the value %s is not of type String"%(new_str))
+        self.__string_1 = new_str
         
-    def set_string_2(self, str):
-        if (not isinstance(str, str)):
-            raise ValueError("the value %s is not of type String"%(str))
-        self.__string_2 = str
+    def set_string_2(self, new_str):
+        if (not isinstance(new_str, str)):
+            raise ValueError("the value %s is not of type String"%(new_str))
+        self.__string_2 = new_str
 
     def __create_matrix(self):
         for col_s2 in range(len(self.__string_2)+1):
@@ -43,15 +43,15 @@ class eed:
                 row_val.append("")
             self.__eed_operations.append(row_val)
             
-    def _create_edit_distance(self):
+    def create_edit_distance(self):
         self.__create_matrix()
         self.__create_empty_rows()
         self.__create_empty_column()
         for row in range(1,len(self.__eed_matrix)):  
             for col in range(1,len(self.__eed_matrix[row])):
-                if self._check_case_nothing(row, col):
+                if self.__check_case_nothing(row, col):
                     continue
-                self.check_rest(row, col)
+                self.__check_rest(row, col)
         self.__eed = self.__eed_matrix[len(self.__eed_matrix)-1][len(self.__eed_matrix[0])-1]
         self.__calculate_eed_factor()
         self.__calculate_pfeed_factor()
@@ -178,7 +178,7 @@ class eed:
         for row_label, row in zip(row_labels, self.__eed_matrix):
             print('%s [%s]') % (row_label, ' '.join('%03s' % i for i in row))
                 
-    def check_rest(self, row, col): 
+    def __check_rest(self, row, col): 
         self.__lowest_val = 0
         self.__val_above = self.__eed_matrix[row-1][col]
         self.__val_left = self.__eed_matrix[row][col-1]
@@ -195,7 +195,7 @@ class eed:
         self.__eed_matrix[row][col]=self.__lowest_val+1
         self.__eed_operations[0][0] = "n"
               
-    def _check_case_nothing(self, row, col):
+    def __check_case_nothing(self, row, col):
         s1 = self.__string_1
         s2 = self.__string_2
         if s1[col-1]==s2[row-1]:
@@ -218,4 +218,4 @@ class eed:
             __num+=1
 
 e1 = eed(s1="Fussball",s2="Football", print_steps=True)
-e1._create_edit_distance()
+e1.create_edit_distance()
