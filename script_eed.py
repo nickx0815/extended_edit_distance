@@ -50,13 +50,16 @@ class eed:
         print("")
         print(str(round(self.__para_free_extended_edit_distance,2)))
     
-    def _print_string_list(self):
+    def __print_header_top(self):
         list_c = []
+        list_empty = []
         list_c.append(" ")
-        list_c.append(" ")
+        list_empty.append(" ")
         for char in self.__string_1:
             list_c.append(char)
+            list_empty.append(" ")
         print(list_c)
+        print(list_empty)
             
     
     def __calculate_factor(self):
@@ -88,14 +91,11 @@ class eed:
         self.__extended_edit_distance = self.__eed+(self.__total_number_char-(2*self.__total_num))
     
     def __print_matrix(self):
-        num = 0
         for row in range(len(self.__eed_matrix)):
             list_d = []
             list_c = self.__eed_matrix[row]
-            
             for char in list_c:
                 list_d.append(str(char))
-                
             print(list_d)
                 
     def check_rest(self, row, col): 
@@ -122,16 +122,16 @@ class eed:
         __num=0
         for col in self.__eed_matrix[0]:
             self.__eed_matrix[0][__num]=__num
-            __num=__num+1
+            __num+=1
         
     
     def __create_empty_column(self):
         __num=0
         for col in range(len(self.__eed_matrix)):
             self.__eed_matrix[__num][0]=__num
-            __num=__num+1
+            __num+=1
 
-e1 = eed("kleider","leid")
+e1 = eed("hund","bvb")
 e1._create_eed()
         
         
