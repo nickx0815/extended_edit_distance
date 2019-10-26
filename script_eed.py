@@ -1,10 +1,9 @@
 class eed:
     
-    def __init__(self, s1, s2, print_steps = False):
+    def __init__(self, s1, s2):
         for s in [s1,s2]:
             if (not isinstance(s, str)):
                 raise ValueError("the value %s is not of type String!"%(s))
-        self.ps = print_steps
         self.__string_1=s1.lower()
         self.__string_2=s2.lower()
     
@@ -238,5 +237,5 @@ class eed:
             self.__eed_operations[__num][0]= 'i'
             __num+=1
 
-e1 = eed(s1="Wirtschaft",s2="Kunst", print_steps=True)
+e1 = eed(s1="Wirtschaft",s2="Kunst")
 e1.create_edit_distance()
