@@ -112,7 +112,7 @@ class eed:
                 num_operation+=1
             elif operation == "r":
                 new_char = list_string_to.pop()
-                char = list_string_from[index_row-1]
+                char = list_string_from[index_col-1]
                 list_string_from[index_col-1]=new_char
                 index_col-=1
                 if index_row>0:
@@ -217,5 +217,5 @@ class eed:
             self.__eed_operations[__num][0]= 'i'
             __num+=1
 
-e1 = eed(s1="Fussball",s2="Football", print_steps=True)
+e1 = eed(s1="Nick",s2="Teresa", print_steps=True)
 e1.create_edit_distance()
