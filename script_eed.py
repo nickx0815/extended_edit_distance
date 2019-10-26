@@ -109,6 +109,7 @@ class eed:
         n_operation = self.__eed
         print("Original String")
         print(list_string_from)
+        print(" ")
         while(n_operation>0):
             operation = self.__eed_operations[index_row][index_col]
             if operation == "i":
@@ -116,15 +117,17 @@ class eed:
                     index_row-=1
                 new_char = list_string_to.pop()
                 list_string_from.insert(index_col, new_char)
-                print("Operation Nr.%s: INSERTION of %s")%(num_operation, new_char)
+                print("Operation Nr.%s: INSERTION of %s at Index %s")%(num_operation, new_char, index_col)
                 print(list_string_from)
+                print(" ")
                 n_operation-=1
                 num_operation+=1
             elif operation == "d":
                 popped_string  = list_string_from.pop(index_col-1)
                 index_col-=1
-                print("Operation Nr.%s: DELETION of %s")%(num_operation, popped_string)
+                print("Operation Nr.%s: DELETION of %s at Index %s")%(num_operation, popped_string, index_col)
                 print(list_string_from)
+                print(" ")
                 n_operation-=1
                 num_operation+=1
             elif operation == "r":
@@ -134,9 +137,10 @@ class eed:
                 index_col-=1
                 if index_row>0:
                     index_row-=1
-                print("Operation Nr.%s: REPLACEMENT of %s with %s")%(num_operation, char.upper(),
-                                                                          new_char)
+                print("Operation Nr.%s: REPLACEMENT of %s with %s at Index %s")%(num_operation, char.upper(),
+                                                                          new_char, index_col)
                 print(list_string_from)
+                print(" ")
                 n_operation-=1
                 num_operation+=1
             elif operation == "n":
