@@ -1,14 +1,15 @@
 class eed:
     
-    def __init__(self, s1="test1", s2="test2", print_steps = False):
+    def __init__(self, s1, s2, print_steps = False):
+        self.__eed_matrix = []
+        self.__eed_operations = []
+        
         self.ps = print_steps
         self.__string_1=s1.lower()
         self.__string_2=s2.lower()
         self.__create_matrix()
                     
     def __create_matrix(self):
-        self.__eed_matrix = []
-        self.__eed_operations = []
         for col_s2 in range(len(self.__string_2)+1):
             row_val = []
             for row_s1 in range(len(self.__string_1)+1):
@@ -66,6 +67,8 @@ class eed:
         index_col = len(list_string_from)
         num_operation = 1
         n_operation = self.__eed
+        print("Original String")
+        print(list_string_from)
         while(n_operation>0):
             operation = self.__eed_operations[index_row][index_col]
             if operation == "i":
@@ -78,17 +81,15 @@ class eed:
                 n_operation-=1
                 num_operation+=1
             elif operation == "d":
-                #if index_row>0:
-                #    index_row-=1
                 popped_string  = list_string_from.pop(index_col-1)
                 index_col-=1
-                #char = list_string_from[char]
                 print("Operation Nr.%s: DELETION of %s")%(num_operation, popped_string)
                 print(list_string_from)
                 n_operation-=1
                 num_operation+=1
             elif operation == "r":
                 new_char = list_string_to.pop()
+                char = list_string_from[index_row-1]
                 list_string_from[index_col-1]=new_char
                 index_col-=1
                 if index_row>0:
@@ -169,6 +170,7 @@ class eed:
             self.__lowest_val=self.__val_left_above
             self.__eed_operations[row][col] = "r"
         self.__eed_matrix[row][col]=self.__lowest_val+1
+        self.__eed_operations[0][0] = "n"
               
     def _check_case_nothing(self, row, col):
         s1 = self.__string_1
@@ -192,7 +194,7 @@ class eed:
             self.__eed_operations[__num][0]= 'i'
             __num+=1
 
-e1 = eed(s1="Meerschweinchen",s2="Hase", print_steps=False)
+e1 = eed(s1="Fussball",s2="Football", print_steps=True)
 e1._create_eed()
         
         
