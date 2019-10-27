@@ -43,6 +43,7 @@ class eed:
         self.__eed_matrix = []
         self.__eed_operations = []
         self.__create_matrix()
+        self.__eed_matrix[0][0]=1
         self.__create_empty_rows()
         self.__create_empty_column()
         for row in range(1,len(self.__eed_matrix)):  
@@ -56,10 +57,11 @@ class eed:
         self.__print_result()
         
     def __print_result(self):
+        print(" ")
         print("String 1: "+self.__string_1.upper()+" to String 2: "+self.__string_2.upper())
         print("") 
         print("")
-        print("Edit Steps") 
+        print("minimal Edit Steps") 
         print("")
         self.__print_edit_step()
         print(" ")
@@ -68,18 +70,39 @@ class eed:
         print(" ")
         self.__print_matrix_operations()
         print(" ")
-        print("Mininmal number of operations") 
+        print("Mininmal number of operations: %s"%(str(self.__eed))) 
         print("")
-        print(str(self.__eed))
+        print("Extended edit distance: %s"%(str(self.__extended_edit_distance))) 
         print("")
-        print("Extended edit distance") 
+        print("Parameter Free Extended edit distance: %s"
+              %(str(round(self.__para_free_extended_edit_distance,2)))) 
         print("")
-        print(str(self.__extended_edit_distance))
-        print("")
-        print("Parameter Free Extended edit distance") 
-        print("")
-        print(str(round(self.__para_free_extended_edit_distance,2)))
+        print("Number of Subsequences: %s"%
+              (self.__CommomSubsequencesCount(self.__string_1, self.__string_2)))
     
+    def __CommomSubsequencesCount(self, s, t): 
+        n1 = len(s) 
+        n2 = len(t) 
+        dp = [[0 for i in range(n2 + 1)]  
+             for i in range(n1 + 1)] 
+  
+        # for each character of S 
+        for i in range(1, n1 + 1): 
+  
+        # for each charcater in T 
+            for j in range(1, n2 + 1): 
+  
+            # if character are same in both  
+            # the string 
+                if (s[i - 1] == t[j - 1]): 
+                    dp[i][j] = (1 + dp[i][j - 1] + 
+                                dp[i - 1][j])          
+                else: 
+                    dp[i][j] = (dp[i][j - 1] + dp[i - 1][j] -
+                            dp[i - 1][j - 1])          
+          
+        return dp[n1][n2] 
+  
     def __print_matrix_operations(self):
         row_labels = [" "]
         col_labels = "         "
@@ -93,10 +116,10 @@ class eed:
         print(" ")
         print("N = do nothing / R = Replacement / I = Insertion / D = Deletion")
         print(" ")
-        print(" ____________________________")
-        print("| Replacement | Insertion    |")
         print(" ----------------------------")
-        print("| Deletion    | your're_here |")
+        print("| Replacement |   Insertion  |")
+        print(" ----------------------------")
+        print("|  Deletion   | your're here |")
         print(" ----------------------------")
         
     def __print_edit_step(self):
@@ -217,6 +240,7 @@ class eed:
             self.__lowest_val=self.__val_left_above
             self.__eed_operations[row][col] = "r"
         self.__eed_matrix[row][col]=self.__lowest_val+1
+        
         self.__eed_operations[0][0] = "n"
               
     def __check_case_nothing(self, row, col):
@@ -241,5 +265,5 @@ class eed:
             self.__eed_operations[__num][0]= 'i'
             __num+=1
 
-e1 = eed(s1="kitten",s2="sitting")
+e1 = eed(s1="marwan",s2="fuad")
 e1.create_edit_distance()
