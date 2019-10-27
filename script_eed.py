@@ -243,7 +243,6 @@ class eed:
             lowest_val=val_left_above
             self.__eed_operations[row][col] = "r"
         self.__eed_matrix[row][col]=lowest_val+1
-        
         self.__eed_operations[0][0] = "n"
               
     def __check_case_nothing(self, row, col):
