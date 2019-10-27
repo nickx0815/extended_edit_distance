@@ -265,5 +265,5 @@ class eed:
             self.__eed_operations[__num][0]= 'i'
             __num+=1
 
-e1 = eed(s1="marwan",s2="fuad")
+e1 = eed("marwan","fuad")
 e1.create_edit_distance()
