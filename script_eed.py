@@ -27,34 +27,41 @@ class eed:
             raise ValueError("the value %s is not of type String"%(new_str))
         self.__string_2 = new_str.lower()
 
-    def __create_matrix(self):
-        for col_s2 in range(len(self.__string_2)+1):
+    def __create__empty_matrix(self , s1, s2):
+        for col_s2 in range(len(s2)+1):
             row_val = []
-            for row_s1 in range(len(self.__string_1)+1):
+            for row_s1 in range(len(s1)+1):
                 row_val.append("")
             self.__eed_matrix.append(row_val)
-        for col_s2 in range(len(self.__string_2)+1):
+        for col_s2 in range(len(s2)+1):
             row_val = []
-            for row_s1 in range(len(self.__string_1)+1):
+            for row_s1 in range(len(s1)+1):
                 row_val.append("")
             self.__eed_operations.append(row_val)
             
     def create_edit_distance(self):
         self.__eed_matrix = []
         self.__eed_operations = []
-        self.__create_matrix()
-        self.__eed_matrix[0][0]=1
+        self.__create__empty_matrix(self.__string_1, self.__string_2)
         self.__create_empty_rows()
         self.__create_empty_column()
+        self.__fill_matrix()
+        self.__print_result()
+    
+    def __set_eed(self):
+        self.__eed = self.__eed_matrix[len(self.__eed_matrix)-1][len(self.__eed_matrix[0])-1]
+        
+    def __fill_matrix(self):
+        self.__eed_matrix[0][0]=0
         for row in range(1,len(self.__eed_matrix)):  
             for col in range(1,len(self.__eed_matrix[row])):
                 if self.__check_case_nothing(row, col):
                     continue
                 self.__check_rest(row, col)
-        self.__eed = self.__eed_matrix[len(self.__eed_matrix)-1][len(self.__eed_matrix[0])-1]
+        self.__set_eed()
         self.__calculate_eed_factor()
         self.__calculate_pfeed_factor()
-        self.__print_result()
+        self.__CommomSubsequencesCount(self.__string_1, self.__string_2)
         
     def __print_result(self):
         print(" ")
@@ -78,20 +85,17 @@ class eed:
               %(str(round(self.__para_free_extended_edit_distance,2)))) 
         print("")
         print("Number of Subsequences: %s"%
-              (self.__CommomSubsequencesCount(self.__string_1, self.__string_2)))
+              (self.__seq_count))
     
     def __CommomSubsequencesCount(self, s, t): 
         n1 = len(s) 
         n2 = len(t) 
         dp = [[0 for i in range(n2 + 1)]  
              for i in range(n1 + 1)] 
-  
         # for each character of S 
         for i in range(1, n1 + 1): 
-  
         # for each charcater in T 
             for j in range(1, n2 + 1): 
-  
             # if character are same in both  
             # the string 
                 if (s[i - 1] == t[j - 1]): 
@@ -100,8 +104,7 @@ class eed:
                 else: 
                     dp[i][j] = (dp[i][j - 1] + dp[i - 1][j] -
                             dp[i - 1][j - 1])          
-          
-        return dp[n1][n2] 
+        self.__seq_count= dp[n1][n2] 
   
     def __print_matrix_operations(self):
         row_labels = [" "]
@@ -227,19 +230,19 @@ class eed:
                 
     def __check_rest(self, row, col): 
         self.__lowest_val = 0
-        self.__val_above = self.__eed_matrix[row-1][col]
-        self.__val_left = self.__eed_matrix[row][col-1]
-        self.__val_left_above = self.__eed_matrix[row-1][col-1]
-        if self.__val_above < self.__val_left:
-            self.__lowest_val = self.__val_above
+        val_above = self.__eed_matrix[row-1][col]
+        val_left = self.__eed_matrix[row][col-1]
+        val_left_above = self.__eed_matrix[row-1][col-1]
+        if val_above < val_left:
+            lowest_val = val_above
             self.__eed_operations[row][col] = "i"
         else:
-            self.__lowest_val = self.__val_left
+            lowest_val = val_left
             self.__eed_operations[row][col] = "d"
-        if self.__val_left_above<=self.__lowest_val:
-            self.__lowest_val=self.__val_left_above
+        if val_left_above<=lowest_val:
+            lowest_val=val_left_above
             self.__eed_operations[row][col] = "r"
-        self.__eed_matrix[row][col]=self.__lowest_val+1
+        self.__eed_matrix[row][col]=lowest_val+1
         
         self.__eed_operations[0][0] = "n"
               
@@ -265,5 +268,5 @@ class eed:
             self.__eed_operations[__num][0]= 'i'
             __num+=1
 
-e1 = eed("marwan","fuad")
+e1 = eed("affen","felsen")
 e1.create_edit_distance()
