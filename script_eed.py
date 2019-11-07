@@ -1,9 +1,8 @@
 class eed:
     
     def __init__(self, s1, s2):
-        for s in [s1,s2]:
-            if (not isinstance(s, str)):
-                raise ValueError("the value %s is not of type String!"%(s))
+        self.check_string(s1)
+        self.check_string(s2)
         self.__string_1=s1.lower()
         self.__string_2=s2.lower()
     
@@ -17,14 +16,16 @@ class eed:
             return self.__string_2
         return False
     
+    def check_string(self, _str):
+        if (not isinstance(_str, str)):
+            raise ValueError("the value %s is not of type String"%(_str))
+    
     def set_string_1(self, new_str):
-        if (not isinstance(new_str, str)):
-            raise ValueError("the value %s is not of type String"%(new_str))
+        self.check_string(new_str)
         self.__string_1 = new_str.lower()
         
     def set_string_2(self, new_str):
-        if (not isinstance(new_str, str)):
-            raise ValueError("the value %s is not of type String"%(new_str))
+        self.check_string(new_str)
         self.__string_2 = new_str.lower()
 
     def __create__empty_matrix(self , s1, s2):
@@ -47,7 +48,7 @@ class eed:
         self.__create_empty_column()
         self.__fill_matrix()
         self.__print_result()
-    
+        
     def __set_eed(self):
         self.__eed = self.__eed_matrix[len(self.__eed_matrix)-1][len(self.__eed_matrix[0])-1]
         
@@ -65,10 +66,10 @@ class eed:
         
     def __print_result(self):
         print(" ")
-        print("String 1: "+self.__string_1.upper()+" to String 2: "+self.__string_2.upper())
+        print("String 1: {} to String 2: {}".format(self.__string_1.upper(), self.__string_2.upper()))
         print("") 
         print("")
-        print("minimal Edit Steps") 
+        print("Minimal Edit Steps") 
         print("")
         self.__print_edit_step()
         print(" ")
@@ -267,5 +268,5 @@ class eed:
             self.__eed_operations[__num][0]= 'i'
             __num+=1
 
-e1 = eed("affen","felsen")
+e1 = eed("Kleid","Hose")
 e1.create_edit_distance()
