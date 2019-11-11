@@ -129,6 +129,7 @@ class eed:
     def __print_edit_step(self):
         list_string_from = []
         list_string_to = []
+        dic_operations = {}
         for char in self.__string_1:
             list_string_from.append(char.upper())
         for char in self.__string_2:
@@ -150,6 +151,10 @@ class eed:
                 print("Operation Nr.%s: INSERTION of %s at Index %s")%(num_operation, new_char, index_col)
                 print(list_string_from)
                 print(" ")
+                if dic_operations.get("Insertion"):
+                    dic_operations["Insertion"]+=1
+                else:
+                    dic_operations["Insertion"]=1
                 n_operation-=1
                 num_operation+=1
             elif operation == "d":
@@ -158,6 +163,10 @@ class eed:
                 print("Operation Nr.%s: DELETION of %s at Index %s")%(num_operation, popped_string, index_col)
                 print(list_string_from)
                 print(" ")
+                if dic_operations.get("Deletion"):
+                    dic_operations["Deletion"]+=1
+                else:
+                    dic_operations["Deletion"]=1
                 n_operation-=1
                 num_operation+=1
             elif operation == "r":
@@ -171,6 +180,10 @@ class eed:
                                                                           new_char, index_col)
                 print(list_string_from)
                 print(" ")
+                if dic_operations.get("Replacement"):
+                    dic_operations["Replacement"]+=1
+                else:
+                    dic_operations["Replacement"]=1
                 n_operation-=1
                 num_operation+=1
             elif operation == "n":
@@ -178,7 +191,12 @@ class eed:
                     index_row-=1
                 index_col-=1
                 list_string_to.pop()
-    
+        self.print_dic_operations(dic_operations)
+
+    def print_dic_operations(self, dic):
+        for k in dic:
+            print("{}: {}").format(k.upper(),dic[k])
+           
     def __print_header_top(self):
         list_c = []
         list_empty = []
@@ -268,5 +286,5 @@ class eed:
             self.__eed_operations[__num][0]= 'i'
             __num+=1
 
-e1 = eed("Kleid","Hose")
+e1 = eed("marwan","fuad")
 e1.create_edit_distance()
