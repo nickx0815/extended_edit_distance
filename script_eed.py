@@ -1,11 +1,5 @@
 class eed:
     
-    def __init__(self, s1, s2):
-        self.check_string(s1)
-        self.check_string(s2)
-        self.__string_1=s1.lower()
-        self.__string_2=s2.lower()
-    
     def get_string_1(self):
         if self.__string_1:
             return self.__string_1
@@ -17,9 +11,10 @@ class eed:
         return False
     
     def check_string(self, _str):
-        if (not isinstance(_str, str)):
-            raise ValueError("the value %s is not of type String"%(_str))
-    
+        for string in _str:
+            if (not isinstance(string, str)):
+                raise ValueError("the value %s is not of type String"%(string))
+        
     def set_string_1(self, new_str):
         self.check_string(new_str)
         self.__string_1 = new_str.lower()
@@ -40,7 +35,10 @@ class eed:
                 row_val.append("")
             self.__eed_operations.append(row_val)
             
-    def create_edit_distance(self):
+    def create_edit_distance(self, s1, s2):
+        self.check_string([s1,s2])
+        self.__string_1=s1.lower()
+        self.__string_2=s2.lower()
         self.__eed_matrix = []
         self.__eed_operations = []
         self.__create__empty_matrix(self.__string_1, self.__string_2)
@@ -148,7 +146,7 @@ class eed:
                     index_row-=1
                 new_char = list_string_to.pop()
                 list_string_from.insert(index_col, new_char)
-                print("Operation Nr.%s: INSERTION of %s at Index %s")%(num_operation, new_char, index_col)
+                print("Operation Nr.%s: INSERTION of %s at Index %s"%(num_operation, new_char, index_col))
                 print(list_string_from)
                 print(" ")
                 if dic_operations.get("Insertion"):
@@ -286,5 +284,5 @@ class eed:
             self.__eed_operations[__num][0]= 'i'
             __num+=1
 
-e1 = eed("marwan","fuad")
-e1.create_edit_distance()
+e1 = eed()
+e1.create_edit_distance("troy","abed")
