@@ -189,9 +189,9 @@ class eed:
                     index_row-=1
                 index_col-=1
                 list_string_to.pop()
-        self.print_dic_operations(dic_operations)
+        self.__print_dic_operations(dic_operations)
 
-    def print_dic_operations(self, dic):
+    def __print_dic_operations(self, dic):
         for k in dic:
             print("{}: {}".format(k.upper(),dic[k]))
            
