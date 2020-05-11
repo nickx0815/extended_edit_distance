@@ -116,7 +116,7 @@ class eed:
             col_labels+="%s   " % (char.upper())
         print(col_labels)
         for row_label, row in zip(row_labels, self.__eed_operations):
-            print('%s [%s]') % (row_label, ' '.join('%03s' % i.upper() for i in row))
+            print('%s [%s]' % (row_label, ' '.join('%03s' % i.upper() for i in row)))
         print(" ")
         print("N = do nothing / R = Replacement / I = Insertion / D = Deletion")
         print(" ")
@@ -160,7 +160,7 @@ class eed:
             elif operation == "d":
                 popped_string  = list_string_from.pop(index_col-1)
                 index_col-=1
-                print("Operation Nr.%s: DELETION of %s at Index %s")%(num_operation, popped_string, index_col)
+                print("Operation Nr.%s: DELETION of %s at Index %s"%(num_operation, popped_string, index_col))
                 print(list_string_from)
                 print(" ")
                 if dic_operations.get("Deletion"):
@@ -176,8 +176,8 @@ class eed:
                 index_col-=1
                 if index_row>0:
                     index_row-=1
-                print("Operation Nr.%s: REPLACEMENT of %s with %s at Index %s")%(num_operation, char.upper(),
-                                                                          new_char, index_col)
+                print("Operation Nr.%s: REPLACEMENT of %s with %s at Index %s"%(num_operation, char.upper(),
+                                                                          new_char, index_col))
                 print(list_string_from)
                 print(" ")
                 if dic_operations.get("Replacement"):
@@ -195,7 +195,7 @@ class eed:
 
     def print_dic_operations(self, dic):
         for k in dic:
-            print("{}: {}").format(k.upper(),dic[k])
+            print("{}: {}".format(k.upper(),dic[k]))
            
     def __print_header_top(self):
         list_c = []
@@ -245,7 +245,7 @@ class eed:
             col_labels+="%s   " % (char.upper())
         print(col_labels)
         for row_label, row in zip(row_labels, self.__eed_matrix):
-            print('%s [%s]') % (row_label, ' '.join('%03s' % i for i in row))
+            print('%s [%s]'% (row_label, ' '.join('%03s' % i for i in row)))
                 
     def __check_rest(self, row, col): 
         self.__lowest_val = 0
